@@ -9,6 +9,7 @@ cursor.execute("DELETE FROM users")
 
 conn.commit()
 print("✅ All users deleted successfully.")
+print("Sucessful...")
 
 cursor.close()
 conn.close()
