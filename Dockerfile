@@ -1,21 +1,20 @@
-FROM node:18
+# Use official Node + Python base image
+FROM node:18-bullseye
 
+# Install Python
+RUN apt update && apt install -y python3 python3-pip
 
-RUN apt-get update && \
-    apt-get install -y python3 python3-pip && \
-    apt-get clean
-
+# Set working directory
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
-
-COPY requirements.txt ./
-RUN pip3 install --no-cache-dir -r requirements.txt || true
-
+# Copy your files
 COPY . .
 
-EXPOSE 3000
+# Install Node.js dependencies
+RUN npm install
 
+# Expose your app port
+EXPOSE 10000
 
-CMD ["node", "server.js"]
+# Start the server
+CMD ["npm", "start"]
