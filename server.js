@@ -20,7 +20,7 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
 
-  const pythonProcess = spawn('python', ['loginPageFinder.py', email, password]);
+  const pythonProcess = spawn('python3', ['loginPageFinder.py', email, password]);
 
   let resultData = '';
 
@@ -69,14 +69,14 @@ app.post("/google-login", async (req, res) => {
 
     console.log("Google user:", firstName, lastName, email); 
 
-    const python = spawn("python", ["InsertGoogleUser.py", firstName, lastName, email]);
+    const python = spawn("python3", ["InsertGoogleUser.py", firstName, lastName, email]);
 
     python.stdout.on("data", (data) => {
-      console.log(`PYTHON STDOUT: ${data.toString()}`); // ✅ debug check
+      console.log(`PYTHON STDOUT: ${data.toString()}`); 
     });
 
     python.stderr.on("data", (data) => {
-      console.error(`PYTHON ERROR: ${data.toString()}`); // ❌ catches error
+      console.error(`PYTHON ERROR: ${data.toString()}`); 
     });
 
     python.on("close", (code) => {
@@ -109,7 +109,7 @@ app.post('/register', (req, res) => {
     gender
   } = req.body;
 
-  const pythonProcess = spawn('python', [
+  const pythonProcess = spawn('python3', [
     'registerPage.py',
     firstName,
     lastName,
@@ -160,7 +160,7 @@ app.get('/contact', (req, res) => {
 app.post('/contact', (req, res) => {
   const { full_name, email_id, message } = req.body;
 
-  const python = spawn('python', ['store_contact.py', full_name, email_id, message]);
+  const python = spawn('python3', ['store_contact.py', full_name, email_id, message]);
 
   python.stdout.on('data', (data) => {
     console.log(`Python says: ${data}`);
@@ -190,7 +190,7 @@ app.post('/contact', (req, res) => {
 });
 // .......................... For Sending Mail ........................... //
 app.post('/contact', (req, res) => {
-  const python = spawn('python', ['SendMessageNewUser.py', email_id, full_name, message]);
+  const python = spawn('python3', ['SendMessageNewUser.py', email_id, full_name, message]);
 
   python.stdout.on('data', (data) => {
     console.log(`Python stdout: ${data}`);
