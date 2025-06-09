@@ -4,7 +4,8 @@ const path = require('path');
 const { spawn } = require('child_process');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -213,5 +214,5 @@ app.post('/contact', (req, res) => {
 //....................................................... Contact end...........................................................//
 
 app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+  console.log(✅ Server running at http://localhost:${PORT});
 });
